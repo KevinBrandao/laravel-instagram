@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Jobs\FindMaxPrime;
 use App\Models\Like;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -139,5 +139,11 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         //
+    }
+
+    public function prime($limit)
+    {
+        FindMaxPrime::dispatch($limit, auth()->id());
+        return 'Primo sendo encontrado. Aguarde...';
     }
 }
